@@ -1,4 +1,5 @@
-import { Button } from "@mui/material";
+
+import Button from "@mui/material/Button";
 import { Product } from "../../app/models/product";
 import ProductList from "./ProductList";
 
@@ -11,7 +12,7 @@ export default function Catalog({products, addProduct}: Props) {
     return (
         <>
             <ProductList products={products} />
-            <Button variant="contained" onClick={addProduct}>Add product</Button>
+            <Button variant="contained" onClick={addProduct}>Add Product</Button>
 
         </>
         
