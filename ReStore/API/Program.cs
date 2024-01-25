@@ -12,7 +12,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<StoreContext>(opt => {
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-builder.Services.AddCors();
+//builder.Services.AddCors();
+builder.Services.AddCors(options =>
+     {
+         options.AddPolicy("AllowAll",
+             builder =>
+             {
+                 builder
+                 .AllowAnyOrigin() 
+                 .AllowAnyMethod()
+                 .AllowAnyHeader();
+             });
+     });
 var app = builder.Build();
 
 // Configure the HTTP request pipelines.
@@ -22,9 +33,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(opt => {
-    opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
-});
+// app.UseCors(opt => {
+//     opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://127.0.0.1:3000/");
+// });
+app.UseCors("AllowAll");
+
 app.UseAuthorization();
 
 app.MapControllers();
