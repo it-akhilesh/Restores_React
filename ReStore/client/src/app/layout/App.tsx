@@ -25,8 +25,8 @@ function App() {
       <CssBaseline />
       <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
       <Container>
-        <Outlet />
-      <Catalog />
+         
+        <Outlet /> 
       </Container>
       
     </ThemeProvider>
