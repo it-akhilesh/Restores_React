@@ -1,10 +1,10 @@
-import { ContactPage } from "@mui/icons-material";
 import { createBrowserRouter } from "react-router-dom";
 import AboutPage from "../../features/about/AboutPage";
 import Catalog from "../../features/catalog/Catalog";
 import ProductDetails from "../../features/catalog/ProductDetails";
 import HomePage from "../../features/home/HomePage";
 import App from "../layout/App";
+import ContactPage from "../../features/contact/ContactPage";
 
 export const router = createBrowserRouter([
     {
