@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,6 +31,7 @@ namespace API.Entities
             if (item.Quantity == 0) Items.Remove(item);
         }
     }
+    [Table("BasketItem")]
 
     public class BasketItem
     {
@@ -41,5 +43,8 @@ namespace API.Entities
         public int ProductId { get; set;}
 
         public Product Product { get; set; }
+
+        public int BasketId { get; set; }
+        public Basket Basket { get; set; }
     }
 }
