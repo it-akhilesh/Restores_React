@@ -35,9 +35,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// app.UseCors(opt => {
-//     opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://127.0.0.1:3000/");
-// });
+ app.UseCors(opt => {
+     opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://127.0.0.1:3000/");
+ });
 app.UseCors("AllowAll");
 
 app.UseAuthorization();
