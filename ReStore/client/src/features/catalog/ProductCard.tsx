@@ -3,7 +3,7 @@ import { Product } from "../../app/models/product";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import agent from "../../app/api/agent";
-import LoadingButton from "@mui/lab/LoadingButton";
+import { LoadingButton } from "@mui/lab";
 
 interface Props {
     product: Product;
@@ -14,20 +14,20 @@ export default function ProductCard({ product }: Props) {
     function handleAddItem(productId: number) {
         setLoading(true);
         agent.Basket.addItem(productId)
-        .catch(ever => console.log(ever))
-        .finally(() => setLoading(false));
+            .catch(error => console.log(error))
+            .finally(() => setLoading(false));
     }
     return (
         <Card>
             <CardHeader
                 avatar={
-                    <Avatar sx={{bgcolor: 'secondary.main'}}>
+                    <Avatar sx={{ bgcolor: 'secondary.main' }}>
                         {product.name.charAt(0).toUpperCase()}
                     </Avatar>
                 }
                 title={product.name}
                 titleTypographyProps={{
-                    sx: {fontWeight: 'bold', color: 'primary.main'}
+                    sx: { fontWeight: 'bold', color: 'primary.main' }
                 }}
             />
             <CardMedia
@@ -44,7 +44,11 @@ export default function ProductCard({ product }: Props) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <LoadingButton loading={loading} onClick={() => handleAddItem(product.id)} size="small">Add to cart</LoadingButton>
+                <LoadingButton
+                    loading={loading}
+                    onClick={() => handleAddItem(product.id)}
+                    size="small">Add to cart
+                </LoadingButton>
                 <Button component={Link} to={`/catalog/${product.id}`} size="small">View</Button>
             </CardActions>
         </Card>
