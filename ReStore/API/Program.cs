@@ -35,14 +35,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
- app.UseCors(opt => {
-     opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://127.0.0.1:3000/");
- });
-app.UseCors("AllowAll");
+//  app.UseCors(opt => {
+//      opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://127.0.0.1:3000");
+//  });
+// app.UseCors("AllowAll");
+app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); 
 
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<StoreContext>();

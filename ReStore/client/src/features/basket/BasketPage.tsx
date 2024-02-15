@@ -6,23 +6,23 @@ import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHe
 import { Delete } from "@mui/icons-material";
 
 export default function BasketPage() {
-    const [loading, setLoading] = useState(true);
-    const [basket, setBasket] = useState<Basket | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [basket, setBasket] = useState<Basket | null>(null);
 
-    useEffect(() => {
-        agent.Basket.get()
-        .then(basket => setBasket(basket))
-        .catch(error => console.log(error))
-        .finally(() => setLoading(false))
-    }, [])
+  useEffect(() => {
+    agent.Basket.get()
+      .then(basket => setBasket(basket))
+      .catch(error => console.log(error))
+      .finally(() => setLoading(false))
+  }, [])
 
-    if (loading) return <LoadingComponent message='Loading basket...' />
+  if (loading) return <LoadingComponent message='Loading basket...' />
 
-    if (!basket) return <Typography variant="h3">Your basket is empty</Typography>
+  if (!basket) return <Typography variant="h3">Your basket is empty</Typography>
 
-    return (
-        <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+  return (
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }}>
         <TableHead>
           <TableRow>
             <TableCell>Product</TableCell>
@@ -43,10 +43,10 @@ export default function BasketPage() {
               </TableCell>
               <TableCell align="right">${(item.price / 100).toFixed(2)}</TableCell>
               <TableCell align="right">{item.quantity}</TableCell>
-              <TableCell align="right">${((item.price /100) * item.quantity).toFixed(2)}</TableCell>
+              <TableCell align="right">${((item.price / 100) * item.quantity).toFixed(2)}</TableCell>
               <TableCell align="right">
                 <IconButton color='error'>
-                    <Delete />
+                  <Delete />
                 </IconButton>
               </TableCell>
             </TableRow>
@@ -54,5 +54,5 @@ export default function BasketPage() {
         </TableBody>
       </Table>
     </TableContainer>
-    )
+  )
 }
