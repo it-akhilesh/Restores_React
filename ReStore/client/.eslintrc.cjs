@@ -10,6 +10,7 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh'],
+  
   rules: {
     "@typescript-eslint/ban-types": 
     [
@@ -27,7 +28,8 @@ module.exports = {
       { allowConstantExport: true },
     ],
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "warn"
+    "@typescript-eslint/no-unused-vars": "warn",
+    "no-explicit-any": ["off"]
     
   },
   

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const INCREMENT_COUNTER = "INCREMENT_COUNTER";
 export const DECREMENT_COUNTER = "DECREMENT_COUNTER";
 
@@ -26,8 +27,8 @@ export default function counterReducer(state = initialState, action: any) {
                 }
            
             default:
-                break;
+                return state;
+                
     }
-
-    return state;
+  
 }
