@@ -15,13 +15,13 @@ import { store } from './app/store/configureStore.js';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <StoreProvider>
+    
       <Provider store={store}>
       <RouterProvider router={router} />
 
       </Provider>
 
-    </StoreProvider>
+    
     
   </React.StrictMode>
 );
