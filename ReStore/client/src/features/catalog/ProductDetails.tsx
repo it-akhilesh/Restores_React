@@ -9,13 +9,14 @@ import NotFound from "../../app/errors/NotFound";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
 import { addBasketItemAsync, removeBasketItemAsync } from "../basket/basketSlice";
+import { productSelectors } from "./catalogSlice";
 
 
 export default function ProductDetails() {
     const {basket, status} = useAppSelector(state => state.basket);
     const dispatch = useAppDispatch();
     const { id } = useParams<{ id: string }>();
-    const [product, setProduct] = useState<Product | null>(null);
+    const product = useAppSelector(state => productSelectors.selectById(state, id));
     const [loading, setLoading] = useState(true);
     const [quantity, setQuantity] = useState(0);
     
