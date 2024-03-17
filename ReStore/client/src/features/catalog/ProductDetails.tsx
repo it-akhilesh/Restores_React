@@ -10,6 +10,7 @@ import LoadingComponent from "../../app/layout/LoadingComponent";
 import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
 import { addBasketItemAsync, removeBasketItemAsync } from "../basket/basketSlice";
 import { productSelectors } from "./catalogSlice";
+//import { productSelectors } from "./catalogSlice";
 
 
 export default function ProductDetails() {
