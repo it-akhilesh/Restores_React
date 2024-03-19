@@ -17,7 +17,7 @@ export default function ProductDetails() {
     const {basket, status} = useAppSelector(state => state.basket);
     const dispatch = useAppDispatch();
     const { id } = useParams<{ id: string }>();
-    const product = useAppSelector(state => productSelectors.selectById(state, id));
+    const product = useAppSelector(state => productSelectors.selectById(state, id));        
     const [loading, setLoading] = useState(true);
     const [quantity, setQuantity] = useState(0);
     
