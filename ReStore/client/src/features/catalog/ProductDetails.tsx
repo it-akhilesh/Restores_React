@@ -1,7 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Product } from "../../app/models/product";
-import agent from "../../app/api/agent";
 
 import { LoadingButton } from "@mui/lab";
 import { Grid, Typography, Divider, TableContainer, Table, TableBody, TableRow, TableCell, TextField } from "@mui/material";
@@ -9,7 +7,7 @@ import NotFound from "../../app/errors/NotFound";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import { useAppDispatch, useAppSelector } from "../../app/store/configureStore";
 import { addBasketItemAsync, removeBasketItemAsync } from "../basket/basketSlice";
-import { productSelectors } from "./catalogSlice";
+import { fetchProductAsync, productSelectors } from "./catalogSlice";
 //import { productSelectors } from "./catalogSlice";
 
 
@@ -20,15 +18,12 @@ export default function ProductDetails() {
     const product = useAppSelector(state => productSelectors.selectById(state, id));        
     const [loading, setLoading] = useState(true);
     const [quantity, setQuantity] = useState(0);
-    
     const item = basket?.items.find(i => i.productId === product?.id);
 
     useEffect(() => {
-        id && agent.Catalog.details(parseInt(id))
-            .then(response => setProduct(response))
-            .catch(error => console.log(error))
-            .finally(() => setLoading(false));
-    }, [id, item]);
+        if (item) setQuantity(item.quantity);
+        if (!product) dispatch(fetchProductAsync(parseInt(id)));
+    }, [id, item, dispatch, product])
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
         if (parseInt(event.currentTarget.value) >= 0)
@@ -118,3 +113,4 @@ export default function ProductDetails() {
         </Grid>
     )
 }
+
