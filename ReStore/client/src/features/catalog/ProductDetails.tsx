@@ -15,7 +15,8 @@ export default function ProductDetails() {
     const {basket, status} = useAppSelector(state => state.basket);
     const dispatch = useAppDispatch();
     const { id } = useParams<{ id: string }>();
-    const product = useAppSelector(state => productSelectors.selectById(state, id));        
+    const product = useAppSelector(state => productSelectors.selectById(state, id));  
+    const {status: productStatus} = useAppSelector(state => state.catalog);      
     const [loading, setLoading] = useState(true);
     const [quantity, setQuantity] = useState(0);
     const item = basket?.items.find(i => i.productId === product?.id);
@@ -44,7 +45,7 @@ export default function ProductDetails() {
     }
 
 
-    if (loading) return <LoadingComponent message='Loading product...' />
+    if (productStatus.includes('pending')) return <LoadingComponent message='Loading product...' />
 
     if (!product) return <NotFound />
 
