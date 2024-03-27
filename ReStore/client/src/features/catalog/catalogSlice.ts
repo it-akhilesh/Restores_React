@@ -7,11 +7,11 @@ const productsAdapter = createEntityAdapter<Product>();
 
 export const fetchProductsAsync = createAsyncThunk<Product[]>(
     'catalog/fetchProductsAsync',
-    async () => {
+    async (_, thunkAPI) => {
         try {
             return await agent.Catalog.list()
         } catch (error) {
-            console.log(error);
+            return thunkAPI.rejectWithValue({error: error.data})
         }
     }
 )
