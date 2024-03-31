@@ -14,7 +14,7 @@ const initialState: BasketState = {
 
 export const addBasketItemAsync = createAsyncThunk<Basket, {productId: number, quantity?: number}>(
     'basket/addBasketItemAsync',
-    async ({productId, quantity = 1}) => {
+    async ({productId, quantity = 1}, thunkAPI) => {
         try 
         {
             return await agent.Basket.addItem(productId, quantity);
