@@ -20,7 +20,7 @@ export const addBasketItemAsync = createAsyncThunk<Basket, {productId: number, q
             return await agent.Basket.addItem(productId, quantity);
 
         } catch (error) {
-            console.log(error);
+            return thunkAPI.rejectWithValue({error: error.data})
         }
     }
 )
@@ -53,9 +53,10 @@ export const basketSlice = createSlice({
             state.basket = action.payload;
             state.status = 'idle';
         });
-        builder.addCase(addBasketItemAsync.rejected, (state) => {
+        builder.addCase(addBasketItemAsync.rejected, (state, action) => {
             
             state.status = 'idle';
+            console.log(action.payload);
         });
         builder.addCase(removeBasketItemAsync.pending, (state, action) => {
             state.status = 'pendingRemoveItem' + action.meta.arg.productId + action.meta.arg.name;
@@ -71,8 +72,9 @@ export const basketSlice = createSlice({
 
 
         });
-        builder.addCase(removeBasketItemAsync.rejected, (state) => {
+        builder.addCase(removeBasketItemAsync.rejected, (state, action) => {
             state.status = 'idle';
+            console.log(action.payload);
         })
     })
 })
