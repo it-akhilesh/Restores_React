@@ -27,11 +27,11 @@ export const addBasketItemAsync = createAsyncThunk<Basket, {productId: number, q
 export const removeBasketItemAsync = createAsyncThunk<void, {productId: number, quantity: number
 , name?: string}>(
     'basket/removeBasketItemAsync',
-    async ({productId, quantity}) => {
+    async ({productId, quantity}, thunkAPI) => {
         try {
             await agent.Basket.removeItem(productId, quantity);
         } catch (error) {
-            console.log(error);
+            return thunkAPI.rejectWithValue({error: error.data})
         }
     }
 )
