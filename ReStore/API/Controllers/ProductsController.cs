@@ -30,6 +30,7 @@ namespace API.Controllers
                 "priceDesc" => query.OrderByDescending(p => p.Price),
                 _ => query.OrderBy(p => p.Name)
             };
+            return await query.ToListAsync();
         }
 
         [HttpGet("{id}")]
