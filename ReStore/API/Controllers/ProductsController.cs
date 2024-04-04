@@ -25,11 +25,7 @@ namespace API.Controllers
         {
             
             var query = _context.Products.AsQueryable();
-            query = orderBy switch{
-                "price" => query.OrderBy(p => p.Price),
-                "priceDesc" => query.OrderByDescending(p => p.Price),
-                _ => query.OrderBy(p => p.Name)
-            };
+            
             return await query.ToListAsync();
         }
 
